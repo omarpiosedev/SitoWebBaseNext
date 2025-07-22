@@ -4,8 +4,8 @@ const sentryOptions: Sentry.NodeOptions | Sentry.EdgeOptions = {
   // Sentry DSN
   dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
 
-  // Enable Spotlight in development (set to false to reduce console logs)
-  spotlight: false, // Set to true if you want to use Sentry Spotlight debugger
+  // Enable Spotlight in development
+  spotlight: process.env.NODE_ENV === 'development',
 
   integrations: [
     Sentry.consoleLoggingIntegration(),
@@ -15,7 +15,7 @@ const sentryOptions: Sentry.NodeOptions | Sentry.EdgeOptions = {
   sendDefaultPii: true,
 
   // Adjust this value in production, or use tracesSampler for greater control
-  tracesSampleRate: process.env.NODE_ENV === 'development' ? 0.1 : 1,
+  tracesSampleRate: 1,
 
   // Enable logs to be sent to Sentry
   _experiments: { enableLogs: true },
